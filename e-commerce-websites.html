@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="red">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NOVA333X // Holographic E-Commerce Execution Core</title>
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+--accent-color: #ff3333;
+--accent-glow: rgba(255, 51, 51, 0.4);
+--bg-base: #030305;
+--archival-border: rgba(255, 51, 51, 0.3);
+}
+
+[data-theme="purple"] {
+--accent-color: #a855f7;
+--accent-glow: rgba(168, 85, 247, 0.4);
+--archival-border: rgba(168, 85, 247, 0.3);
+}
+
+[data-theme="emerald"] {
+--accent-color: #10b981;
+--accent-glow: rgba(16, 185, 129, 0.4);
+--archival-border: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="blue"] {
+--accent-color: #3b82f6;
+--accent-glow: rgba(59, 130, 246, 0.4);
+--archival-border: rgba(59, 130, 246, 0.3);
+}
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+html {
+scroll-padding-top: 88px;
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+}
+
+body {
+font-family: 'Space Grotesk', sans-serif;
+background-color: var(--bg-base);
+color: #ededed;
+cursor: auto !important;
+min-width: 320px;
+overflow-x: hidden;
+transition: background-color 0.4s ease;
+}
+
+a,
+button,
+summary,
+[role="button"] {
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea,
+select {
+cursor: text;
+}
+
+img,
+video,
+svg {
+max-width: 100%;
+}
+
+.mono-text {
+font-family: 'JetBrains Mono', monospace;
+}
+
+/* Archival Background Noise */
+
+.archival-noise {
+position: fixed;
+inset: 0;
+z-index: -1;
+background:
+radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 65%),
+linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+background-size: 100% 4px;
+pointer-events: none;
+}
+
+/* Cinematic Flying & Glowing Eyes Animation */
+
+@keyframes cinematicFly {
+0% {
+transform: scale(1.2) translateY(30px);
+opacity: 0;
+filter: blur(10px);
+}
+
+50% {
+opacity: 0.8;
+filter: blur(0px);
+}
+
+100% {
+transform: scale(1) translateY(0);
+opacity: 0.55;
+}
+}
+
+.cinematic-bg-video {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+animation: cinematicFly 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+filter: contrast(130%) brightness(60%) saturate(120%);
+}
+
+@keyframes glowingEyes {
+0%, 100% {
+box-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
+opacity: 0.8;
+}
+
+50% {
+box-shadow: 0 0 20px var(--accent-color), 0 0 35px var(--accent-color);
+opacity: 1;
+transform: scale(1.2);
+}
+}
+
+.glow-eye-1,
+.glow-eye-2 {
+position: absolute;
+width: 8px;
+height: 8px;
+background-color: #fff;
+border-radius: 50%;
+animation: glowingEyes 1.5s infinite ease-in-out;
+z-index: 5;
+}
+
+/* Dropdown Menus */
+
+.dropdown-menu {
+opacity: 0;
+pointer-events: none;
+transform: translateY(12px) skewX(-2deg);
+transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .dropdown-menu,
+.group:focus-within .dropdown-menu {
+opacity: 1;
+pointer-events: auto;
+transform: translateY(0) skewX(0deg);
+}
+
+/* Archival Cards */
+
+.archival-card {
+background: #08080c;
+border: 2px solid var(--archival-border);
+position: relative;
+transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+min-width: 0;
+}
+
+.archival-card::before {
+content: attr(data-index);
+position: absolute;
+top: -12px;
+left: 16px;
+max-width: calc(100% - 32px);
+background: #030305;
+padding: 0 8px;
+font-family: 'JetBrains Mono', monospace;
+font-size: 10px;
+color: var(--accent-color);
+border: 1px solid var(--archival-border);
+}
+
+.archival-card:hover {
+transform: translate(-4px, -4px);
+border-color: var(--accent-color);
+box-shadow: 10px 10px 0px var(--accent-color);
+}
+
+.theme-btn {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+.theme-btn:hover {
+transform: scale(1.3);
+}
+
+.modal-active {
+opacity: 1 !important;
+pointer-events: auto !important;
+}
+
+/* ================= RESPONSIVE NAVIGATION ================= */
+
+.site-header {
+min-height: 68px;
+padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+}
+
+.desktop-header-actions {
+display: flex;
+}
+
+.mobile-header-actions,
+.mobile-menu {
+display: none;
+}
+
+.mobile-menu[hidden] {
+display: none !important;
+}
+
+.mobile-menu-button {
+width: 44px;
+height: 44px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 5px;
+padding: 0;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 12px;
+background: rgba(255, 255, 255, 0.05);
+color: #fff;
+}
+
+.mobile-menu-button span {
+display: block;
+width: 19px;
+height: 2px;
+border-radius: 2px;
+background: currentColor;
+transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mobile-menu-button[aria-expanded="true"] span:nth-child(1) {
+transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-button[aria-expanded="true"] span:nth-child(2) {
+opacity: 0;
+}
+
+.mobile-menu-button[aria-expanded="true"] span:nth-child(3) {
+transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu-links {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.mobile-menu-links > a,
+.mobile-menu-links summary {
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: 48px;
+padding: 12px 10px;
+color: #e4e4e7;
+border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+font: 700 12px/1.4 'JetBrains Mono', monospace;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+list-style: none;
+}
+
+.mobile-menu-links summary::-webkit-details-marker {
+display: none;
+}
+
+.mobile-menu-links summary i {
+color: var(--accent-color);
+transition: transform 0.2s ease;
+}
+
+.mobile-menu-links details[open] summary i {
+transform: rotate(180deg);
+}
+
+.mobile-submenu {
+display: grid;
+gap: 2px;
+padding: 6px 0 10px 12px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-submenu a {
+display: block;
+min-height: 44px;
+padding: 12px 10px;
+color: #a1a1aa;
+font: 500 13px/1.4 'Space Grotesk', sans-serif;
+}
+
+.mobile-menu-actions {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-top: 16px;
+}
+
+.mobile-menu-actions button {
+min-height: 46px;
+padding: 10px 12px;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 999px;
+color: #fff;
+background: rgba(255, 255, 255, 0.05);
+font: 700 10px/1.35 'JetBrains Mono', monospace;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+}
+
+.mobile-menu-actions button:last-child {
+color: #050505;
+background: #fff;
+border-color: #fff;
+}
+
+/* ================= MODAL RESPONSIVENESS ================= */
+
+body.modal-open {
+overflow: hidden;
+}
+
+#contactModal,
+#authModal {
+padding-top: max(12px, env(safe-area-inset-top, 0px));
+padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+overflow-y: auto;
+overscroll-behavior: contain;
+-webkit-overflow-scrolling: touch;
+}
+
+#contactModal > div,
+#authModal > div {
+max-height: calc(100vh - 24px);
+max-height: calc(
+100dvh - 24px -
+env(safe-area-inset-top, 0px) -
+env(safe-area-inset-bottom, 0px)
+);
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+}
+
+#contactForm input,
+#contactForm textarea,
+#authModal input {
+width: 100%;
+min-width: 0;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+width: 6px;
+}
+
+::-webkit-scrollbar-track {
+background: #030305;
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--accent-color);
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1023px) {
+
+html {
+scroll-padding-top: 76px;
+}
+
+.site-header {
+min-height: 66px;
+padding-left: 16px;
+padding-right: 16px;
+gap: 12px;
+}
+
+.desktop-header-actions {
+display: none !important;
+}
+
+.mobile-header-actions {
+display: flex;
+align-items: center;
+flex: 0 0 auto;
+}
+
+.mobile-menu:not([hidden]) {
+display: block;
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+max-height: calc(
+100dvh - 76px -
+env(safe-area-inset-top, 0px)
+);
+overflow-y: auto;
+overscroll-behavior: contain;
+padding: 14px 16px max(18px, env(safe-area-inset-bottom, 0px));
+background: rgba(5, 5, 9, 0.98);
+border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+-webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu-links > a,
+.mobile-menu-links summary {
+min-height: 50px;
+}
+
+#execution-core {
+padding-top: 48px;
+}
+
+#execution-core > .grid {
+gap: 28px;
+}
+
+#execution-core .archival-card {
+padding: 20px;
+}
+
+.archival-card {
+min-width: 0;
+}
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 767px) {
+
+html {
+scroll-padding-top: 68px;
+}
+
+.site-header {
+min-height: 62px;
+padding-left: 12px;
+padding-right: 12px;
+}
+
+.site-header > a span {
+font-size: 17px;
+}
+
+.mobile-header-actions {
+gap: 8px;
+}
+
+.mobile-menu-button {
+width: 42px;
+height: 42px;
+}
+
+.mobile-menu:not([hidden]) {
+max-height: calc(
+100dvh - 62px -
+env(safe-area-inset-top, 0px)
+);
+padding-left: 12px;
+padding-right: 12px;
+}
+
+/* Hero */
+
+#hero {
+padding: 100px 14px 44px;
+}
+
+#hero h1 {
+font-size: clamp(1.8rem, 8vw, 2.8rem);
+line-height: 1.12;
+overflow-wrap: anywhere;
+}
+
+#hero p {
+font-size: 10px;
+line-height: 1.7;
+}
+
+/* Execution Core */
+
+#execution-core {
+padding: 38px 14px 52px;
+}
+
+#execution-core > .grid {
+grid-template-columns: minmax(0, 1fr);
+gap: 26px;
+}
+
+#execution-core .archival-card {
+padding: 18px;
+}
+
+#execution-core .archival-card h3 {
+font-size: 16px;
+line-height: 1.4;
+}
+
+#execution-core > .grid > div:last-child {
+padding: 18px;
+box-shadow: 6px 6px 0 var(--accent-color);
+}
+
+#telemetryTitle {
+font-size: 10px;
+overflow-wrap: anywhere;
+}
+
+#telemetryTags {
+flex-wrap: wrap;
+gap: 8px;
+}
+
+#telemetryTags span {
+font-size: 9px;
+line-height: 1.5;
+}
+
+/* Neural Telemetry Grid */
+
+section.py-20 {
+padding: 52px 14px;
+}
+
+section.py-20 h2 {
+font-size: clamp(1.65rem, 7vw, 2.4rem);
+line-height: 1.15;
+}
+
+section.py-20 .archival-card {
+padding: 20px;
+}
+
+section.py-20 .grid {
+gap: 16px;
+}
+
+#synthOutput {
+min-height: 64px;
+height: auto;
+overflow-wrap: anywhere;
+line-height: 1.6;
+}
+
+#decodeBtn,
+#scanBtn {
+width: 100%;
+justify-content: center;
+min-height: 46px;
+}
+
+/* Architectural Standards */
+
+section.border-t-2 {
+padding: 52px 14px;
+}
+
+section.border-t-2 h2 {
+font-size: clamp(1.65rem, 7vw, 2.4rem);
+line-height: 1.12;
+overflow-wrap: anywhere;
+}
+
+section.border-t-2 .border-l-4 {
+padding-left: 14px;
+}
+
+section.border-t-2 .grid {
+gap: 18px;
+}
+
+/* Footer */
+
+footer {
+padding: 42px 16px !important;
+margin-top: 20px !important;
+}
+
+footer > div {
+gap: 22px;
+}
+
+footer .flex.gap-6 {
+flex-wrap: wrap;
+gap: 14px;
+}
+
+/* Contact & Auth Modals */
+
+#contactModal,
+#authModal {
+align-items: flex-start;
+padding: 12px;
+}
+
+#contactModal > div,
+#authModal > div {
+width: 100%;
+max-width: 100%;
+max-height: calc(
+100dvh - 24px -
+env(safe-area-inset-top, 0px) -
+env(safe-area-inset-bottom, 0px)
+);
+padding: 22px 16px;
+margin: auto 0;
+box-shadow: 6px 6px 0 var(--accent-color);
+}
+
+#contactModal h3,
+#authModal h3 {
+font-size: 1.4rem;
+}
+
+#contactForm input,
+#contactForm textarea,
+#authModal input {
+min-height: 46px;
+font-size: 16px;
+}
+
+#contactForm textarea {
+min-height: 110px;
+}
+
+/* Toast */
+
+#toastNotification {
+left: 12px;
+right: 12px;
+bottom: max(12px, env(safe-area-inset-bottom, 0px));
+width: auto;
+max-width: none;
+padding: 12px;
+}
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media (max-width: 380px) {
+
+.site-header > a span {
+font-size: 15px;
+}
+
+.mobile-menu-actions {
+grid-template-columns: 1fr;
+}
+
+#preloader {
+padding: 20px;
+}
+
+#preloader .mono-text {
+font-size: 9px;
+letter-spacing: 0.08em;
+}
+
+#preloader h1 {
+font-size: 2.5rem;
+}
+
+#execution-core .archival-card {
+padding: 16px;
+}
+}
+
+/* Touchscreen devices */
+
+@media (hover: none), (pointer: coarse) {
+
+.archival-card:hover {
+transform: none;
+box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
+}
+
+.theme-btn:hover {
+transform: none;
+}
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+*,
+*::before,
+*::after {
+scroll-behavior: auto !important;
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+}
+</style>
+</head>
+
+<body class="selection:bg-red-600 selection:text-white">
+
+<div class="archival-noise"></div>
+
+<!-- ================= CINEMATIC PRELOADER ================= -->
+
+<div id="preloader" class="fixed inset-0 bg-[#030305] z-[100000] flex flex-col justify-between p-8 md:p-16 transition-all duration-700 select-none overflow-hidden">
+
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="glow-eye-1" style="top: 38%; left: 48%;"></div>
+<div class="glow-eye-2" style="top: 38%; left: 51%;"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#030305] via-black/40 to-[#030305]"></div>
+</div>
+
+<div class="flex justify-between items-center mono-text text-xs text-[var(--accent-color)] uppercase tracking-widest border-b-2 border-[#222] pb-4 relative z-10">
+<span class="animate-pulse flex items-center gap-2">
+<i class="fa-solid fa-crow text-white"></i>
+[HOLOGRAPHIC E-COMMERCE CORE:]
+</span>
+
+<span>INITIALIZING NEURAL CORE</span>
+</div>
+
+<div class="my-auto relative z-10 text-center flex flex-col items-center justify-center">
+
+<h1 class="font-['Syne'] text-4xl sm:text-5xl md:text-6xl font-extrabold text-white uppercase tracking-tighter drop-shadow-[0_0_25px_var(--accent-glow)] mb-3">
+NOVA<span class="text-[var(--accent-color)]">333</span>X
+</h1>
+
+<div class="mono-text text-3xl font-extrabold text-[var(--accent-color)] tracking-[0.2em] mb-4" id="preloaderCounter">
+00%
+</div>
+
+<div class="w-64 max-w-full h-1.5 bg-[#111] border border-[#333] relative overflow-hidden rounded-full">
+<div id="preloaderBar" class="h-full bg-[var(--accent-color)] transition-all duration-75 shadow-[0_0_15px_var(--accent-color)]" style="width: 0%;"></div>
+</div>
+
+<p class="mono-text text-[10px] text-zinc-300 uppercase mt-4 tracking-widest" id="preloaderStatus">
+// INITIALIZING NEURAL CORE...
+</p>
+</div>
+
+<div class="flex justify-between items-end mono-text text-xs text-zinc-400 uppercase border-t-2 border-[#222] pt-4 relative z-10">
+<span>HOLOGRAPHIC STREAM</span>
+<span class="text-white">EYES GLOW MATRIX</span>
+</div>
+</div>
+
+<!-- ================= RESPONSIVE NAVBAR ================= -->
+
+<header class="site-header fixed top-0 left-0 w-full z-50 bg-[#030305]/95 border-b-2 border-[#222] px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center backdrop-blur-md">
+
+<a href="#" class="flex items-center gap-3 shrink-0">
+<span class="font-['Syne'] font-extrabold text-xl tracking-tighter text-white uppercase">
+NOVA333X<span class="text-[var(--accent-color)]">.</span>
+</span>
+</a>
+
+<!-- Desktop Navigation -->
+
+<div class="desktop-header-actions items-center gap-6 text-xs uppercase tracking-widest font-mono font-bold">
+
+<nav class="hidden lg:flex gap-6 text-zinc-400 items-center">
+
+<a href="index.html" class="hover:text-white transition">Home</a>
+
+<!-- Services Dropdown Menu -->
+
+<div class="relative group py-2">
+<button type="button" class="hover:text-white transition flex items-center gap-1">
+Services
+<i class="fa-solid fa-chevron-down text-[9px]"></i>
+</button>
+
+<div class="dropdown-menu absolute top-full left-0 bg-[#08080c] border-2 border-[var(--accent-color)] p-4 w-56 shadow-[6px_6px_0px_var(--accent-color)] space-y-2">
+<a href="frontend.html" class="block text-zinc-300 hover:text-[var(--accent-color)] transition py-1">Frontend Development</a>
+<a href="responsive.html" class="block text-zinc-300 hover:text-[var(--accent-color)] transition py-1">Responsive Design</a>
+<a href="landing-pages.html" class="block text-zinc-300 hover:text-[var(--accent-color)] transition py-1">Landing Pages</a>
+<a href="e-commerce-websites.html" class="block text-white font-bold py-1 border-t border-zinc-800 pt-1 text-[var(--accent-color)]">E-Commerce Web Sites</a>
+</div>
+</div>
+
+<!-- Projects Dropdown Menu -->
+
+<div class="relative group py-2">
+<button type="button" class="text-white border-b-2 border-[var(--accent-color)] pb-0.5 transition flex items-center gap-1">
+Projects
+<i class="fa-solid fa-chevron-down text-[9px]"></i>
+</button>
+
+<div class="dropdown-menu absolute top-full left-0 bg-[#08080c] border-2 border-[var(--accent-color)] p-4 w-48 shadow-[6px_6px_0px_var(--accent-color)] space-y-2">
+<a href="all-projects.html" class="block text-white font-bold py-1">All Projects</a>
+<a href="case-studies.html" class="block text-zinc-300 hover:text-[var(--accent-color)] transition py-1">Case Studies</a>
+</div>
+</div>
+
+<a href="skills.html" class="hover:text-white transition">Skills</a>
+</nav>
+
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-black border border-[#333] rounded-full mr-2">
+<button type="button" class="theme-btn bg-red-600" data-set-theme="red" title="Cyber Red" aria-label="Cyber Red"></button>
+<button type="button" class="theme-btn bg-purple-500" data-set-theme="purple" title="Neon Purple" aria-label="Neon Purple"></button>
+<button type="button" class="theme-btn bg-emerald-500" data-set-theme="emerald" title="Matrix Emerald" aria-label="Matrix Emerald"></button>
+<button type="button" class="theme-btn bg-blue-500" data-set-theme="blue" title="Electric Blue" aria-label="Electric Blue"></button>
+</div>
+
+<button type="button" id="openAuthModal" class="border-2 border-white hover:border-[var(--accent-color)] px-4 py-2 hover:bg-[var(--accent-color)] hover:text-white transition uppercase text-[11px]">
+Sign In / Register
+</button>
+
+<button type="button" id="openContactModal" class="bg-[var(--accent-color)] text-white border-2 border-[var(--accent-color)] px-5 py-2 hover:bg-white hover:text-black transition uppercase text-[11px] font-extrabold shadow-[4px_4px_0px_#fff]">
+Contact
+</button>
+</div>
+</div>
+
+<!-- Mobile / Tablet Menu Button -->
+
+<div class="mobile-header-actions items-center">
+<button type="button" id="mobileMenuButton" class="mobile-menu-button" aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+
+<!-- Mobile / Tablet Navigation Panel -->
+
+<div id="mobileMenu" class="mobile-menu" hidden>
+
+<nav class="mobile-menu-links" aria-label="Mobile navigation">
+
+<a href="index.html">Home</a>
+
+<details>
+<summary>
+Services
+<i class="fa-solid fa-chevron-down"></i>
+</summary>
+
+<div class="mobile-submenu">
+<a href="front-dev.html">Frontend Development</a>
+<a href="responsive-design.html">Responsive Design</a>
+<a href="landing-pages.html">Landing Pages</a>
+<a href="e-commerce-websites.html">E-Commerce websites</a>
+</div>
+</details>
+
+<details>
+<summary>
+Projects
+<i class="fa-solid fa-chevron-down"></i>
+</summary>
+
+<div class="mobile-submenu">
+<a href="all-projects.html">All Projects</a>
+<a href="case-studies.html">Case Studies</a>
+</div>
+</details>
+
+<a href="skills.html">Skills</a>
+</nav>
+
+<div class="mobile-menu-actions">
+<button type="button" id="mobileOpenAuthModal">Sign In / Register</button>
+<button type="button" id="mobileOpenContactModal">Contact</button>
+</div>
+</div>
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="pt-36 pb-12 px-6 max-w-7xl mx-auto text-center" id="hero">
+
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-black border border-[var(--accent-color)] text-[var(--accent-color)] mono-text text-[10px] uppercase tracking-widest mb-4">
+<i class="fa-solid fa-microchip"></i>
+// NEURAL COMMAND &amp; CYBERNETIC TELEMETRY
+</div>
+
+<h1 class="font-['Syne'] text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white mb-4">
+Holographic E-Commerce
+<span class="text-[var(--accent-color)]">Execution Core</span>
+</h1>
+
+<p class="mono-text text-xs text-zinc-400 max-w-2xl mx-auto uppercase mb-12">
+Interactive cybernetic telemetry streams showcasing real-time store optimization, security encryption, and high-frequency UI rendering matrices.
+</p>
+</section>
+
+<!-- ================= EXECUTION CORE SECTORS ================= -->
+
+<section id="execution-core" class="py-12 px-6 max-w-7xl mx-auto">
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+<div class="lg:col-span-5 space-y-4">
+
+<div class="archival-card p-5 sector-tab active-sector border-[var(--accent-color)]" data-target="sector1" data-telemetry="tech_hardware_matrix.telemetry" data-arch="Framework-Free Vanilla ES6+" data-latency="&lt; 5ms (Multi-Threaded)" data-desc="Engineered for large-scale technology catalogues, allowing users to filter thousands of complex hardware specifications instantly without page reloads or UI stuttering." data-tag1="+40% Catalog Speed" data-tag2="60 FPS Locked UI">
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase mb-1">
+SECTOR_01 // HARDWARE &amp; TECH
+</div>
+
+<h3 class="font-['Syne'] text-lg font-bold text-white">
+Instant Spec Filtering Engine
+</h3>
+</div>
+
+<div class="archival-card p-5 sector-tab" data-target="sector2" data-telemetry="fashion_apparel_variants.telemetry" data-arch="Dynamic DOM Swatch Binding" data-latency="&lt; 2ms (Real-Time)" data-desc="Advanced color and material variant mapping allowing high-end fashion e-commerce storefronts to switch visual styles seamlessly with GPU-accelerated CSS layers." data-tag1="ZERO RE-RENDERS" data-tag2="SVG VECTOR MAPPING">
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase mb-1">
+SECTOR_02 // APPAREL &amp; FASHION
+</div>
+
+<h3 class="font-['Syne'] text-lg font-bold text-white">
+Dynamic Matrix Swatch Mapping
+</h3>
+</div>
+
+<div class="archival-card p-5 sector-tab" data-target="sector3" data-telemetry="encrypted_vault.cross-vault.telemetry" data-arch="AES-256 Client-Side Hashing" data-latency="1.2s Multi-Currency Flow" data-desc="Integrating encrypted local storage session vaults and streamlined payment processing pipelines to guarantee absolute customer data security and frictionless transactions." data-tag1="0 Vulnerabilities" data-tag2="Automated Receipts">
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase mb-1">
+SECTOR_03 // DIGITAL VAULT &amp; GAAS
+</div>
+
+<h3 class="font-['Syne'] text-lg font-bold text-white">
+AES-256 Encrypted Checkout
+</h3>
+</div>
+</div>
+
+<div class="lg:col-span-7 bg-black border-2 border-[var(--accent-color)] p-6 shadow-[12px_12px_0px_var(--accent-color)]">
+
+<div class="flex justify-between items-center gap-3 mono-text text-xs text-zinc-400 border-b border-[#222] pb-3 mb-6">
+<span id="telemetryTitle" class="text-[var(--accent-color)] uppercase font-bold">
+tech_hardware_matrix.telemetry
+</span>
+
+<span class="flex items-center gap-2 text-green-400 shrink-0">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+LIVE_STREAM
+</span>
+</div>
+
+<div class="space-y-6 mono-text text-xs">
+
+<div>
+<span class="text-zinc-500 uppercase block mb-1">// ARCHITECTURE:</span>
+<div id="telemetryArch" class="text-white font-bold bg-[#08080c] p-3 border border-[#222]">
+Framework-Free Vanilla ES6+
+</div>
+</div>
+
+<div>
+<span class="text-zinc-500 uppercase block mb-1">// SEARCH LATENCY:</span>
+<div id="telemetryLatency" class="text-[var(--accent-color)] font-bold bg-[#08080c] p-3 border border-[#222]">
+&lt; 5ms (Multi-Threaded)
+</div>
+</div>
+
+<div>
+<span class="text-zinc-500 uppercase block mb-1">// SPECIFICATION OVERVIEW:</span>
+<p id="telemetryDesc" class="text-zinc-300 leading-relaxed bg-[#08080c] p-4 border border-[#222]">
+Engineered for large-scale technology catalogues, allowing users to filter thousands of complex hardware specifications instantly without page reloads or UI stuttering.
+</p>
+</div>
+
+<div class="flex flex-wrap gap-4 pt-2 border-t border-[#222]" id="telemetryTags">
+<span class="px-3 py-1 bg-[#111] text-zinc-300 border border-[#333]">+40% Catalog Speed</span>
+<span class="px-3 py-1 bg-[#111] text-zinc-300 border border-[#333]">60 FPS Locked UI</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= INTERACTIVE NEURAL TELEMETRY GRID ================= -->
+
+<section class="py-20 px-6 max-w-7xl mx-auto border-t-2 border-[#222]">
+
+<div class="text-center mb-12">
+<span class="mono-text text-xs text-[var(--accent-color)] uppercase tracking-widest">
+// REAL-TIME CANVAS &amp; GRAPHICS ENGINE
+</span>
+
+<h2 class="font-['Syne'] text-4xl sm:text-5xl font-extrabold uppercase text-white mt-2">
+Interactive Neural Telemetry Grid
+</h2>
+
+<p class="mono-text text-xs text-zinc-400 max-w-xl mx-auto mt-2">
+Move your cursor across the canvas to interact with dynamic quantum particles and inspect live rendering metrics.
+</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+<div class="archival-card p-8" data-index="GPU_RENDER_GAUGE // LIVE">
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-6">
+Hardware Acceleration Gauge
+</h3>
+
+<div class="flex flex-col sm:flex-row items-center justify-around gap-6">
+
+<div class="relative w-36 h-36 flex items-center justify-center border-4 border-[var(--accent-color)] rounded-full shadow-[0_0_20px_var(--accent-glow)]">
+<div class="text-center">
+<span class="font-['Syne'] text-2xl font-bold text-white">GPU_60FPS</span>
+<span class="mono-text text-[9px] text-[var(--accent-color)] block">LOCKED</span>
+</div>
+</div>
+
+<div class="space-y-4 mono-text text-xs w-full sm:w-auto">
+<div class="flex justify-between gap-8 border-b border-[#222] pb-2">
+<span class="text-zinc-400">FPS LOCK:</span>
+<span class="text-white font-bold">60 FPS</span>
+</div>
+
+<div class="flex justify-between gap-8 border-b border-[#222] pb-2">
+<span class="text-zinc-400">LATENCY:</span>
+<span class="text-white font-bold">1.2 ms</span>
+</div>
+
+<div class="flex justify-between gap-8">
+<span class="text-zinc-400">STREAM STATUS:</span>
+<span class="text-green-400 font-bold">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="archival-card p-8" data-index="DECODER_MODULE // JS MATRIX">
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-4">
+Cybernetic Text &amp; Code Synthesizer
+</h3>
+
+<p class="font-mono text-xs text-zinc-400 mb-6">
+Click the buttons below to trigger real-time algorithmic text decoding and matrix cipher animations.
+</p>
+
+<div id="synthOutput" class="bg-black border border-[#333] p-4 mono-text text-xs text-green-400 mb-6 min-h-16 flex items-center">
+&gt; WAITING_FOR_INPUT...
+</div>
+
+<div class="flex flex-wrap gap-4">
+<button type="button" id="decodeBtn" class="bg-[#111] border-2 border-[var(--accent-color)] text-white px-5 py-3 mono-text text-xs uppercase font-bold hover:bg-[var(--accent-color)] transition flex items-center gap-2">
+<i class="fa-solid fa-bolt"></i>
+Decode Core Spec
+</button>
+
+<button type="button" id="scanBtn" class="bg-[#111] border-2 border-zinc-700 text-zinc-300 px-5 py-3 mono-text text-xs uppercase font-bold hover:border-[var(--accent-color)] transition flex items-center gap-2">
+<i class="fa-solid fa-shield"></i>
+Run Security Scan
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= ARCHITECTURAL STANDARDS ================= -->
+
+<section class="py-20 px-6 max-w-7xl mx-auto border-t-2 border-[#222]">
+
+<div class="border-l-4 border-[var(--accent-color)] pl-6 mb-12">
+
+<span class="mono-text text-xs text-[var(--accent-color)] uppercase tracking-[0.3em] block mb-2">
+// CORE SERVICE STANDARDS &amp; ARCHITECTURE
+</span>
+
+<h2 class="font-['Syne'] text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white">
+Architectural Standards &amp;
+<span class="text-[var(--accent-color)]">Client Guarantees</span>
+</h2>
+
+<p class="mono-text text-xs text-zinc-400 mt-2 max-w-xl">
+Every e-commerce platform delivered under the NOVA333X banner adheres to strict performance, zero-trust security, and mobile-first responsive standards.
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+<div class="archival-card p-6" data-index="MOBILE">
+<div class="text-[var(--accent-color)] text-2xl mb-4">
+<i class="fa-solid fa-mobile-screen-button"></i>
+</div>
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-2">
+Mobile-First Responsive Engineering
+</h3>
+
+<p class="font-mono text-xs text-zinc-400 mb-4">
+Over 70% of digital store traffic originates on mobile devices. I craft fluid Flexbox and CSS Grid layouts that adapt seamlessly to 4K desktop monitors down to mobile viewports, maintaining a locked 60 FPS animation smoothness.
+</p>
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase border-t border-[#222] pt-2">
+MOBILE_OPTIMIZED
+</div>
+</div>
+
+<div class="archival-card p-6" data-index="ZERO_FRAMEWORK">
+<div class="text-[var(--accent-color)] text-2xl mb-4">
+<i class="fa-solid fa-code"></i>
+</div>
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-2">
+Zero-Framework-Bloat Vanilla Codebase
+</h3>
+
+<p class="font-mono text-xs text-zinc-400 mb-4">
+By avoiding heavy external frameworks where unnecessary, I deliver clean, modular ES6+ JavaScript codebases that load instantly, require minimal maintenance, and achieve top-tier Google Lighthouse performance scores (95+).
+</p>
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase border-t border-[#222] pt-2">
+VANILLA_ES6+ // LIGHTHOUSE
+</div>
+</div>
+
+<div class="archival-card p-6" data-index="CUSTOM_UI">
+<div class="text-[var(--accent-color)] text-2xl mb-4">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+</div>
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-2">
+Custom Cybernetic UI &amp; Preloaders
+</h3>
+
+<p class="font-mono text-xs text-zinc-400 mb-4">
+To establish strong brand identity, I incorporate custom 4K SVG logo animations, interactive mouse-tracking spotlight effects, and cybernetic audio feedback loops that keep buyers immersed and engaged.
+</p>
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase border-t border-[#222] pt-2">
+IMMERSIVE // 4K SVG ANIM
+</div>
+</div>
+
+<div class="archival-card p-6" data-index="SECURITY">
+<div class="text-[var(--accent-color)] text-2xl mb-4">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<h3 class="font-['Syne'] text-xl font-bold uppercase text-white mb-2">
+AES-256 Vault Data Protection
+</h3>
+
+<p class="font-mono text-xs text-zinc-400 mb-4">
+Protecting user shopping cart sessions and sensitive API endpoints against Cross-Site Scripting (XSS) and data injection attempts through client-side encryption and strict token validation protocols.
+</p>
+
+<div class="mono-text text-[10px] text-[var(--accent-color)] uppercase border-t border-[#222] pt-2">
+AES_256.GCM
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="border-t-4 border-[#222] bg-[#0c0c0c] py-16 px-6">
+
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center text-xs mono-text text-zinc-400 gap-6">
+
+<div>
+<h4 class="font-['Syne'] text-lg font-bold text-white uppercase mb-1">
+NOVA333X<span class="text-[var(--accent-color)]">.</span>
+</h4>
+
+<p>
+Holographic E-Commerce Execution Core &amp; Studio.
+</p>
+</div>
+
+<div class="flex gap-6 font-bold">
+<a href="https://github.com/yusufiexweb" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent-color)] transition">GITHUB</a>
+<a href="https://www.upwork.com" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent-color)] transition">UPWORK</a>
+<a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--accent-color)] transition">LINKEDIN</a>
+</div>
+
+<div>
+&copy; 2026 NOVA333X. All rights reserved.
+</div>
+</div>
+</footer>
+
+<!-- ================= CONTACT MODAL ================= -->
+
+<div id="contactModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100001] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+<div class="bg-[#0c0c0c] border-4 border-[var(--accent-color)] w-full max-w-lg p-8 relative shadow-[12px_12px_0px_var(--accent-color)] my-auto">
+
+<button type="button" id="closeContactModal" aria-label="Close contact form" class="absolute top-4 right-4 w-8 h-8 bg-white text-black font-extrabold flex items-center justify-center hover:bg-[var(--accent-color)] hover:text-white transition">
+&times;
+</button>
+
+<div class="mb-6">
+<h3 class="font-['Syne'] text-3xl font-bold uppercase text-white mb-1">
+Contact Me
+</h3>
+
+<p class="text-xs text-zinc-400 font-mono">
+Send a direct holographic store inquiry.
+</p>
+</div>
+
+<form id="contactForm" class="space-y-4 font-mono text-xs">
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Your Name</label>
+<input type="text" required placeholder="John Doe" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Email Address</label>
+<input type="email" required placeholder="name@domain.com" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Your Message</label>
+<textarea rows="4" required placeholder="Project details..." class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none"></textarea>
+</div>
+
+<button type="submit" class="w-full bg-[var(--accent-color)] text-white p-4 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition shadow-[4px_4px_0px_#fff]">
+Send Holographic Inquiry
+</button>
+</form>
+</div>
+</div>
+
+<!-- ================= AUTH MODAL ================= -->
+
+<div id="authModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100001] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+<div class="bg-[#0c0c0c] border-4 border-[var(--accent-color)] w-full max-w-md p-8 relative shadow-[12px_12px_0px_var(--accent-color)] my-auto">
+
+<button type="button" id="closeAuthModal" aria-label="Close account modal" class="absolute top-4 right-4 w-8 h-8 bg-white text-black font-extrabold flex items-center justify-center hover:bg-[var(--accent-color)] hover:text-white transition">
+&times;
+</button>
+
+<div class="text-center mb-6">
+<h3 class="font-['Syne'] text-2xl font-bold uppercase text-white">
+STUDIO PORTAL
+</h3>
+
+<p class="mono-text text-[10px] text-[var(--accent-color)] tracking-widest mt-1">
+BRUTALIST ACCESS &amp; VERIFICATION
+</p>
+</div>
+
+<div class="flex border-b-2 border-zinc-800 mb-6 mono-text text-xs text-center">
+
+<button type="button" id="tabSignIn" class="w-1/2 pb-3 border-b-4 border-[var(--accent-color)] text-white font-bold">
+SIGN IN
+</button>
+
+<button type="button" id="tabSignUp" class="w-1/2 pb-3 border-b-4 border-transparent text-zinc-500 hover:text-zinc-300">
+REGISTER
+</button>
+</div>
+
+<form id="signInForm" class="space-y-4 font-mono text-xs">
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Email</label>
+<input type="email" required placeholder="client@studio.com" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Password</label>
+<input type="password" required placeholder="••••••••" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<button type="submit" class="w-full bg-[var(--accent-color)] text-white p-3 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition shadow-[4px_4px_0px_#fff]">
+Access Account
+</button>
+</form>
+
+<form id="signUpForm" class="space-y-4 font-mono text-xs hidden">
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Full Name</label>
+<input type="text" required placeholder="John Doe" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Email Address</label>
+<input type="email" required placeholder="user@domain.com" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<div>
+<label class="text-zinc-400 uppercase block mb-1">Password</label>
+<input type="password" required placeholder="••••••••" class="w-full bg-black border-2 border-zinc-700 p-3 text-white focus:border-[var(--accent-color)] focus:outline-none">
+</div>
+
+<button type="submit" class="w-full bg-[var(--accent-color)] text-white p-3 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition shadow-[4px_4px_0px_#fff]">
+Register Account
+</button>
+</form>
+</div>
+</div>
+
+<!-- ================= JAVASCRIPT LOGIC ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+// ================= MOBILE / TABLET NAVIGATION =================
+
+const mobileMenuButton = $("#mobileMenuButton");
+const mobileMenu = $("#mobileMenu");
+
+function closeMobileMenu() {
+if (!mobileMenu || !mobileMenuButton) return;
+
+mobileMenu.hidden = true;
+
+mobileMenuButton.setAttribute("aria-expanded", "false");
+mobileMenuButton.setAttribute("aria-label", "Open navigation menu");
+}
+
+function openMobileMenu() {
+if (!mobileMenu || !mobileMenuButton) return;
+
+mobileMenu.hidden = false;
+
+mobileMenuButton.setAttribute("aria-expanded", "true");
+mobileMenuButton.setAttribute("aria-label", "Close navigation menu");
+}
+
+if (mobileMenuButton && mobileMenu) {
+
+mobileMenuButton.addEventListener("click", () => {
+const isOpen =
+mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+if (isOpen) {
+closeMobileMenu();
+} else {
+openMobileMenu();
+}
+});
+
+$$(".mobile-menu a", mobileMenu).forEach((link) => {
+link.addEventListener("click", closeMobileMenu);
+});
+
+document.addEventListener("click", (event) => {
+if (
+!mobileMenu.hidden &&
+!mobileMenu.contains(event.target) &&
+!mobileMenuButton.contains(event.target)
+) {
+closeMobileMenu();
+}
+});
+
+document.addEventListener("keydown", (event) => {
+if (event.key === "Escape") {
+closeMobileMenu();
+}
+});
+
+window.addEventListener("resize", () => {
+if (window.innerWidth >= 1024) {
+closeMobileMenu();
+}
+}, { passive: true });
+}
+
+// ================= PRELOADER LOGIC =================
+
+const preloader = $("#preloader");
+const preloaderCounter = $("#preloaderCounter");
+const preloaderBar = $("#preloaderBar");
+const preloaderStatus = $("#preloaderStatus");
+
+let percent = 0;
+
+if (preloader && preloaderCounter && preloaderBar && preloaderStatus) {
+
+const totalDuration = 1000;
+const intervalTime = 50;
+const increment = 100 / (totalDuration / intervalTime);
+
+const counterInterval = window.setInterval(() => {
+
+percent += increment;
+
+if (percent >= 100) {
+
+percent = 100;
+
+preloaderCounter.textContent = "100%";
+preloaderBar.style.width = "100%";
+preloaderStatus.textContent = "// INITIALIZING NEURAL CORE: 100%";
+
+window.clearInterval(counterInterval);
+
+window.setTimeout(() => {
+
+preloader.style.opacity = "0";
+
+window.setTimeout(() => {
+preloader.style.display = "none";
+}, 700);
+
+}, 400);
+
+} else {
+
+const rounded = Math.floor(percent);
+
+preloaderCounter.textContent =
+(rounded < 10 ? "0" : "") + rounded + "%";
+
+preloaderBar.style.width = rounded + "%";
+
+preloaderStatus.textContent =
+`// INITIALIZING NEURAL CORE: ${rounded}%`;
+}
+
+}, intervalTime);
+}
+
+// ================= SECTOR TABS =================
+
+const sectorTabs = $$(".sector-tab");
+const telemetryTitle = $("#telemetryTitle");
+const telemetryArch = $("#telemetryArch");
+const telemetryLatency = $("#telemetryLatency");
+const telemetryDesc = $("#telemetryDesc");
+const telemetryTags = $("#telemetryTags");
+
+sectorTabs.forEach((tab) => {
+
+tab.addEventListener("click", () => {
+
+sectorTabs.forEach((item) => {
+item.classList.remove(
+"border-[var(--accent-color)]",
+"active-sector"
+);
+
+item.classList.add("border-zinc-800");
+});
+
+tab.classList.add(
+"border-[var(--accent-color)]",
+"active-sector"
+);
+
+tab.classList.remove("border-zinc-800");
+
+if (telemetryTitle) {
+telemetryTitle.textContent = tab.getAttribute("data-telemetry");
+}
+
+if (telemetryArch) {
+telemetryArch.textContent = tab.getAttribute("data-arch");
+}
+
+if (telemetryLatency) {
+telemetryLatency.textContent = tab.getAttribute("data-latency");
+}
+
+if (telemetryDesc) {
+telemetryDesc.textContent = tab.getAttribute("data-desc");
+}
+
+if (telemetryTags) {
+
+const tag1 = document.createElement("span");
+const tag2 = document.createElement("span");
+
+tag1.className = "px-3 py-1 bg-[#111] text-zinc-300 border border-[#333]";
+tag2.className = "px-3 py-1 bg-[#111] text-zinc-300 border border-[#333]";
+
+tag1.textContent = tab.getAttribute("data-tag1") || "";
+tag2.textContent = tab.getAttribute("data-tag2") || "";
+
+telemetryTags.replaceChildren(tag1, tag2);
+}
+});
+});
+
+// ================= CYBERNETIC SYNTHESIZER =================
+
+const synthOutput = $("#synthOutput");
+const decodeBtn = $("#decodeBtn");
+const scanBtn = $("#scanBtn");
+
+decodeBtn?.addEventListener("click", () => {
+
+if (!synthOutput) return;
+
+synthOutput.textContent =
+"> NOVA333X // QUANTUM E-COMMERCE ENGINE DECODED";
+
+window.setTimeout(() => {
+synthOutput.textContent =
+"SYSTEM STATUS: 100% OPTIMIZED & ENCRYPTED(AES-256)";
+}, 1200);
+});
+
+scanBtn?.addEventListener("click", () => {
+
+if (!synthOutput) return;
+
+synthOutput.textContent =
+"> RUNNING VULNERABILITY & SECURITY SCAN...";
+
+window.setTimeout(() => {
+synthOutput.textContent =
+"SECURITY SCAN COMPLETE: 0 THREATS DETECTED (SECURE)";
+}, 1200);
+});
+
+// ================= THEME SWITCHER =================
+
+$$("[data-set-theme]").forEach((btn) => {
+
+btn.addEventListener("click", () => {
+
+const theme = btn.getAttribute("data-set-theme");
+
+if (theme) {
+document.documentElement.setAttribute("data-theme", theme);
+}
+});
+});
+
+// ================= MODAL HELPERS =================
+
+const contactModal = $("#contactModal");
+const authModal = $("#authModal");
+
+function openModal(modal) {
+if (!modal) return;
+
+closeMobileMenu();
+
+modal.classList.add("modal-active");
+document.body.classList.add("modal-open");
+}
+
+function closeModal(modal) {
+if (!modal) return;
+
+modal.classList.remove("modal-active");
+
+const anotherModalOpen = $$(".modal-active").length > 0;
+
+if (!anotherModalOpen) {
+document.body.classList.remove("modal-open");
+}
+}
+
+// ================= CONTACT MODAL =================
+
+$("#openContactModal")?.addEventListener("click", () => {
+openModal(contactModal);
+});
+
+$("#mobileOpenContactModal")?.addEventListener("click", () => {
+openModal(contactModal);
+});
+
+$("#closeContactModal")?.addEventListener("click", () => {
+closeModal(contactModal);
+});
+
+$("#contactForm")?.addEventListener("submit", function (event) {
+
+event.preventDefault();
+
+closeModal(contactModal);
+
+this.reset();
+
+alert("Holographic inquiry successfully transmitted!");
+});
+
+// ================= AUTH MODAL =================
+
+const openAuthModal = $("#openAuthModal");
+const closeAuthModal = $("#closeAuthModal");
+const tabSignIn = $("#tabSignIn");
+const tabSignUp = $("#tabSignUp");
+const signInForm = $("#signInForm");
+const signUpForm = $("#signUpForm");
+const errorBanner = $("#authErrorBanner");
+
+openAuthModal?.addEventListener("click", () => {
+errorBanner?.classList.add("hidden");
+openModal(authModal);
+});
+
+$("#mobileOpenAuthModal")?.addEventListener("click", () => {
+errorBanner?.classList.add("hidden");
+openModal(authModal);
+});
+
+closeAuthModal?.addEventListener("click", () => {
+closeModal(authModal);
+});
+
+// Auth Tabs
+
+function activateSignInTab() {
+
+if (!tabSignIn || !tabSignUp || !signInForm || !signUpForm) {
+return;
+}
+
+tabSignIn.className =
+"w-1/2 pb-3 border-b-4 border-[var(--accent-color)] text-white font-bold";
+
+tabSignUp.className =
+"w-1/2 pb-3 border-b-4 border-transparent text-zinc-500 hover:text-zinc-300";
+
+signInForm.classList.remove("hidden");
+signUpForm.classList.add("hidden");
+
+errorBanner?.classList.add("hidden");
+}
+
+function activateSignUpTab() {
+
+if (!tabSignIn || !tabSignUp || !signInForm || !signUpForm) {
+return;
+}
+
+tabSignUp.className =
+"w-1/2 pb-3 border-b-4 border-[var(--accent-color)] text-white font-bold";
+
+tabSignIn.className =
+"w-1/2 pb-3 border-b-4 border-transparent text-zinc-500 hover:text-zinc-300";
+
+signUpForm.classList.remove("hidden");
+signInForm.classList.add("hidden");
+
+errorBanner?.classList.add("hidden");
+}
+
+tabSignIn?.addEventListener("click", activateSignInTab);
+tabSignUp?.addEventListener("click", activateSignUpTab);
+
+// Auth Validation
+
+function isValidEmail(email) {
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function showAuthError(message) {
+
+if (!errorBanner) return;
+
+errorBanner.textContent = "ERROR: " + message;
+errorBanner.classList.remove("hidden");
+}
+
+signInForm?.addEventListener("submit", (event) => {
+
+event.preventDefault();
+
+const email = $("#signInEmail")?.value.trim() || "";
+const password = $("#signInPassword")?.value || "";
+
+if (!email || !password) {
+showAuthError("Please fill in all required fields!");
+return;
+}
+
+if (!isValidEmail(email)) {
+showAuthError("Please enter a valid email address!");
+return;
+}
+
+errorBanner?.classList.add("hidden");
+
+closeModal(authModal);
+
+alert("Successfully signed in!");
+
+signInForm.reset();
+});
+
+signUpForm?.addEventListener("submit", (event) => {
+
+event.preventDefault();
+
+const name = $("#signUpName")?.value.trim() || "";
+const email = $("#signUpEmail")?.value.trim() || "";
+const password = $("#signUpPassword")?.value || "";
+
+if (!name || !email || !password) {
+showAuthError("Please fill in all registration fields!");
+return;
+}
+
+if (name.length < 3) {
+showAuthError("Full Name must be at least 3 characters long!");
+return;
+}
+
+if (!isValidEmail(email)) {
+showAuthError("Invalid email address format!");
+return;
+}
+
+if (password.length < 6) {
+showAuthError("Password must be at least 6 characters long!");
+return;
+}
+
+errorBanner?.classList.add("hidden");
+
+closeModal(authModal);
+
+alert("Account successfully registered!");
+
+signUpForm.reset();
+});
+
+// ================= MODAL BACKDROP & ESCAPE =================
+
+[contactModal, authModal].forEach((modal) => {
+
+modal?.addEventListener("click", (event) => {
+
+if (event.target === modal) {
+closeModal(modal);
+}
+});
+});
+
+document.addEventListener("keydown", (event) => {
+
+if (event.key === "Escape") {
+closeModal(contactModal);
+closeModal(authModal);
+closeMobileMenu();
+}
+});
+});
+</script>
+
+</body>
+</html>
